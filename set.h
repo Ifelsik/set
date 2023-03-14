@@ -5,14 +5,16 @@
 #ifndef SET_H
 #define SET_H
 
+#include <stdbool.h>
+
 typedef struct sNode tNode;
 
-int find(tNode *begin, const char *value);
+bool find(tNode *begin, const char *value);
 
-void push(tNode **begin, const char *value);
+tNode *push(tNode *begin, const char *value);
 
 void reveal(tNode *begin);
 
-void del(tNode **begin, const char *value);
+tNode *del(tNode *begin, const char *value);
 
 #endif //SET_H
