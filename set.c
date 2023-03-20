@@ -39,13 +39,13 @@ tNode *push(tNode *begin, const char *value) {
 void reveal(tNode *begin) {
 
     while (begin != NULL) {
-        printf("%s\n", begin->value);
+        puts(begin->value);
         begin = begin->next;
     }
 }
 
 // Удаление элемента множества (по значению)
-tNode *del(tNode *begin, const char *value) {
+tNode *pop(tNode *begin, const char *value) {
     tNode *prev = NULL;
     tNode *current = begin;
     while (current != NULL) {

@@ -15,6 +15,6 @@ tNode *push(tNode *begin, const char *value);
 
 void reveal(tNode *begin);
 
-tNode *del(tNode *begin, const char *value);
+tNode *pop(tNode *begin, const char *value);
 
 #endif //SET_H

@@ -2,25 +2,24 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
-
+#define BASE_STRING_LEN 10
 #include "set.c"
 
 //  Ввод элемента
 char *enter() {
-    int32_t len = 10;
-    char *str = malloc(sizeof(char) * len);
+    int64_t len = BASE_STRING_LEN;
+    char *str = malloc(sizeof(char) * (len + 1));
     char character;
-    int32_t str_size = 0;
-    while ((character = getchar()) != '\n' && character != '\r') {
+    int64_t str_size = 0;
+    for(;(character = getchar()) != '\n' && character != '\r'; str_size++) {
         if (str_size + 1 >= len) {
-            len = 2 * (str_size + 1);
+            len = 2 * str_size + 1;
             str = realloc(str, len);
         }
         str[str_size] = character;
-        str_size++;
     }
     char *exit = malloc(sizeof(char) * (str_size + 1));
-    for (int32_t i = 0; i < str_size; i++) {
+    for (int64_t i = 0; i < str_size; i++) {
         exit[i] = str[i];
     }
     exit[str_size] = '\0';
@@ -30,12 +29,12 @@ char *enter() {
 
 
 // Задание множества
-tNode *establish(tNode *set) {
-    int32_t elements;
+tNode* establish(tNode *set) {
+    int64_t elements;
     puts("Enter the number of elements:");
     scanf("%d", &elements);
     fflush(stdin);
-    for (int32_t i = 0; i < elements; i++) {
+    for (int64_t i = 0; i < elements; i++) {
         puts("Enter the element:");
         const char *element = enter();
         set = push(set, element);
@@ -44,7 +43,7 @@ tNode *establish(tNode *set) {
 }
 
 // Выбор множества
-tNode *operations(tNode *set) {
+tNode* operations(tNode *set) {
     puts("Enter:\n1 to add new element\n2 to delete\n3 to show the set\nS to interrupt");
     char opt;
     while ((opt = getchar()) != 'S') {
@@ -56,7 +55,7 @@ tNode *operations(tNode *set) {
                 break;
             case '2':
                 puts("Deletion. Enter the element:");
-                set = del(set, enter());
+                set = pop(set, enter());
                 break;
             case '3':
                 reveal(set);
@@ -72,9 +71,9 @@ tNode *operations(tNode *set) {
 }
 
 
-int32_t main() {
-    tNode *set_A = NULL;
-    tNode *set_B = NULL;
+int64_t main() {
+    tNode* set_A = NULL;
+    tNode* set_B = NULL;
 
     puts("Enter the set A");
     set_A = establish(set_A);
